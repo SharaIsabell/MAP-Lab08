@@ -1,5 +1,6 @@
 package adapters;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -45,101 +46,104 @@ public class MapList<E> implements List<E>{
 
 	@Override
 	public boolean add(E e) {
-		throw new UnsupportedOperationException("Não suportada");
+		map.put(null, e);
+		return map.containsValue(e);
 	}
-
-	@Override
-	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addAll(Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addAll(int index, Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		map.clear();	
 	}
 
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(map.values()).get(index);
 	}
-
-	@Override
-	public E set(int index, E element) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public void add(int index, E element) {
 		throw new UnsupportedOperationException("Não suportada");
 	}
 
 	@Override
+	public boolean remove(Object o) {
+		for(Map.Entry<?, E> m : map.entrySet()) {
+			if(m.getValue().equals(o)) {
+				map.remove(m.getKey());
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public E remove(int index) {
+		int i = 0;
+		for(Map.Entry<?, E> m : map.entrySet()) {
+			if(i == index) {
+				map.remove(map.remove(m.getKey(), m.getValue()));
+				return m.getValue();
+			}
+			i++;
+		}
 		return null;
+	}
+	
+	// Não pediu
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean addAll(Collection<? extends E> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean addAll(int index, Collection<? extends E> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public E set(int index, E element) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ListIterator<E> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }
