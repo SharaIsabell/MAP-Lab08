@@ -33,17 +33,29 @@ public class ListMap<K, V> implements Map<K, V>{
 	}
 
 	@Override
-	public V get(Object key) { //lembrar de jogar excessão
-		return list.get((Integer) key);
+	public V get(Object key) {
+	    if (!(key instanceof Integer)) {
+	        throw new IllegalArgumentException("Parâmetro deve ser inteiro");
+	    }
+	    
+	    return list.get((Integer) key);
+		
 	}
 
 	@Override
-	public V put(K key, V value) { //lembrar de jogar excessão
+	public V put(K key, V value) {
+		if ((Integer) key > list.size() - 1) {
+			list.add(value);
+			return value;
+		}
 		return list.set((Integer) key, value);
 	}
 
 	@Override
-	public V remove(Object key) { //lembrar de jogar excessão
+	public V remove(Object key) {
+		if (!(key instanceof Integer)) {
+	        throw new IllegalArgumentException("Parâmetro deve ser inteiro");
+	    }
 		return list.remove((int)key);
 	}
 
@@ -73,7 +85,6 @@ public class ListMap<K, V> implements Map<K, V>{
 	@Override
 	public Set<K> keySet() {
 		throw new UnsupportedOperationException();
-
 	}
 
 }
